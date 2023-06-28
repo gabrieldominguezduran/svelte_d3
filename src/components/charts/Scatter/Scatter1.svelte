@@ -1,8 +1,8 @@
 <script>
   import * as d3 from "d3";
-  import AxisX from "../utils/AxisX.svelte";
-  import AxisY from "../utils/AxisY.svelte";
-  import Tooltip from "../utils/Tooltip.svelte";
+  import AxisX from "./AxisX.svelte";
+  import AxisY from "./AxisY.svelte";
+  import Tooltip from "./Tooltip.svelte";
 
   const data = [
     { name: "Antonio", hours: 44, grade: 50 },
