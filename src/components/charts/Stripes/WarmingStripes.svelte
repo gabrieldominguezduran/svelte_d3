@@ -4,6 +4,7 @@
 
   let dataset = [];
   let linearScale;
+  let hoveredIndex = -1;
 
   onMount(async () => {
     dataset = await d3
@@ -23,9 +24,9 @@
       .domain([d3.min(dataset, (d) => d.avg), d3.max(dataset, (d) => d.avg)])
       .range([0, colors.length - 1]);
   });
-  let width = 400;
+  let width = 500;
   let height = 600;
-  const xTicks = [1880, 1920, 1960, 2000];
+  const xTicks = [1880, 1930, 1975, 2022];
   const margin = { top: 20, right: 40, bottom: 200, left: 0 };
 
   const colors = [
@@ -48,6 +49,14 @@
     "#b30000",
     "#7f0000",
   ];
+
+  function handleMouseOver(index) {
+    hoveredIndex = index;
+  }
+
+  function handleMouseOut() {
+    hoveredIndex = -1;
+  }
 </script>
 
 <main class="chart-container" bind:clientWidth={width}>
@@ -55,14 +64,27 @@
   <svg {width} {height}>
     <g>
       {#each dataset as d, i}
-        <rect
-          x={i * 6}
-          y="0"
-          width="6"
-          height="400"
-          fill={colors[Math.round(linearScale(d.avg))]}
-          title={`Year: ${d.year} Avg: ${d.avg}`}
-        />
+        <g
+          on:mouseover={() => handleMouseOver(i)}
+          on:focus={() => {
+            handleMouseOver(i);
+          }}
+          on:mouseout={handleMouseOut}
+          on:blur={() => {
+            handleMouseOut;
+          }}
+        >
+          <title>{`Year: ${d.year} Avg: ${d.avg}`}</title>
+          <rect
+            x={i * 6}
+            y="0"
+            width="6"
+            height="400"
+            fill={colors[Math.round(linearScale(d.avg))]}
+            title={`Year: ${d.year} Avg: ${d.avg}`}
+            class:highlighted={hoveredIndex === i}
+          />
+        </g>
       {/each}
     </g>
     <g>
@@ -70,26 +92,19 @@
         <text
           x={tick === 1880
             ? 0
-            : tick === 1920
+            : tick === 1930
             ? 280
-            : tick === 1960
+            : tick === 1975
             ? 550
-            : 825}
+            : 820}
           y={height - margin.bottom}
           dy="6"
           dominant-baseline="hanging"
           fill="white"
         >
-          {tick}
+          {tick === 1880 ? `Year: ${tick}` : tick}
         </text>
       {/each}
-      <line
-        x1={0}
-        y1={height - margin.bottom}
-        x2={0}
-        y2={margin.top}
-        stroke="white"
-      />
     </g>
   </svg>
 </main>
@@ -98,5 +113,11 @@
   .chart-container {
     max-width: 900px;
     margin: 2rem auto;
+  }
+
+  .highlighted {
+    cursor: pointer;
+    stroke: black;
+    stroke-width: 3;
   }
 </style>

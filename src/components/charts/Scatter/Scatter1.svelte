@@ -54,7 +54,7 @@
     <AxisX {height} {xScale} {margin} />
     <AxisY {yScale} {width} {margin} />
     <g class="circles" transform="translate({margin.left} {margin.top})">
-      {#each data.sort((a, b) => a.grade - b.grade) as student}
+      {#each data.sort((a, b) => a.grade - b.grade) as student, i}
         <circle
           cx={xScale(student.grade)}
           cy={yScale(student.hours)}
