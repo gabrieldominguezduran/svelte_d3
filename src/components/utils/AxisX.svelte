@@ -12,6 +12,7 @@
       y={height - margin.bottom}
       dy="6"
       dominant-baseline="hanging"
+      fill="white"
     >
       {tick}%
     </text>
@@ -21,6 +22,6 @@
     y1={height - margin.bottom}
     x2={0}
     y2={margin.top}
-    stroke="black"
+    stroke="white"
   />
 </g>

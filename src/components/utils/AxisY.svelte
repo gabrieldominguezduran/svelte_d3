@@ -7,7 +7,7 @@
 
 <g transform="translate({margin.left} {margin.top})">
   {#each yTicks as tick}
-    <text x={0} y={yScale(tick)} dy="-6" dx="3">
+    <text x={0} y={yScale(tick)} dy="-6" dx="3" fill="white">
       {tick}
       {tick === 60 ? " hours studied" : ""}
     </text>
@@ -16,7 +16,7 @@
       y1={yScale(tick)}
       x2={width}
       y2={yScale(tick)}
-      stroke={tick === 0 ? "black" : "lightgrey"}
+      stroke={tick === 0 ? "white" : "lightgrey"}
     />
   {/each}
 </g>

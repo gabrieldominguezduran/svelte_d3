@@ -17,7 +17,7 @@
 <style>
   .tooltip {
     padding: 0.3rem;
-    background: rgba(208, 207, 207, 0.742);
+    background: rgba(192, 192, 188, 0.742);
     border: 1px solid rgba(0, 0, 0, 0.5);
     border-radius: 5px;
     pointer-events: none;
