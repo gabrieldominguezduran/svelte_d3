@@ -25,9 +25,8 @@
       .range([0, colors.length - 1]);
   });
   let width = 500;
-  let height = 600;
+  let height = 420;
   const xTicks = [1880, 1930, 1975, 2022];
-  const margin = { top: 20, right: 40, bottom: 200, left: 0 };
 
   const colors = [
     "#023858",
@@ -97,7 +96,7 @@
             : tick === 1975
             ? 550
             : 820}
-          y={height - margin.bottom}
+          y={height - 20}
           dy="6"
           dominant-baseline="hanging"
           fill="white"
