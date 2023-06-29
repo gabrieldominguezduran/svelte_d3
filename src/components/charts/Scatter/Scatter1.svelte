@@ -1,8 +1,5 @@
 <script>
   import * as d3 from "d3";
-  import AxisX from "./AxisX.svelte";
-  import AxisY from "./AxisY.svelte";
-  import Tooltip from "./Tooltip.svelte";
 
   const data = [
     { name: "Antonio", hours: 44, grade: 50 },
@@ -40,6 +37,9 @@
     .range([height - margin.top - margin.bottom, 0]);
 
   let hoveredData;
+
+  let yTicks = [0, 20, 40, 60];
+  let xTicks = [0, 25, 50, 75, 100];
 </script>
 
 <main
@@ -51,8 +51,41 @@
 >
   <h1>Students who studied longer scored higher on their final exams</h1>
   <svg {width} {height}>
-    <AxisX {height} {xScale} {margin} />
-    <AxisY {yScale} {width} {margin} />
+    <g>
+      {#each xTicks as tick}
+        <text
+          x={xScale(tick)}
+          y={height - margin.bottom}
+          dy="6"
+          dominant-baseline="hanging"
+          fill="white"
+        >
+          {tick}%
+        </text>
+      {/each}
+      <line
+        x1={0}
+        y1={height - margin.bottom}
+        x2={0}
+        y2={margin.top}
+        stroke="white"
+      />
+    </g>
+    <g transform="translate({margin.left} {margin.top})">
+      {#each yTicks as tick}
+        <text x={0} y={yScale(tick)} dy="-6" dx="3" fill="white">
+          {tick}
+          {tick === 60 ? " hours studied" : ""}
+        </text>
+        <line
+          x1={0}
+          y1={yScale(tick)}
+          x2={width}
+          y2={yScale(tick)}
+          stroke={tick === 0 ? "white" : "lightgrey"}
+        />
+      {/each}
+    </g>
     <g class="circles" transform="translate({margin.left} {margin.top})">
       {#each data.sort((a, b) => a.grade - b.grade) as student, i}
         <circle
@@ -74,15 +107,19 @@
     </g>
   </svg>
   {#if hoveredData}
-    <Tooltip data={hoveredData} {xScale} {yScale} />
+    <div
+      class="tooltip"
+      style="position: absolute; top: {yScale(
+        hoveredData.hours
+      )}px; left: {xScale(hoveredData.grade)}px"
+    >
+      <h4>{hoveredData.name}</h4>
+      <p>{hoveredData.hours} hours studied</p>
+    </div>
   {/if}
 </main>
 
 <style>
-  .chart-container {
-    max-width: 900px;
-    margin: 0 auto;
-  }
   circle {
     transition: r 300ms ease, opacity 300ms ease;
     cursor: pointer;
@@ -96,5 +133,24 @@
     font-size: 1.5rem;
     font-weight: 600;
     margin: 1rem auto;
+  }
+
+  .tooltip {
+    padding: 0.3rem;
+    background: rgba(192, 192, 188, 0.742);
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    pointer-events: none;
+    transition: top 300ms ease, left 300ms ease;
+  }
+
+  h4 {
+    font-weight: 700;
+    margin: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    margin: 0;
   }
 </style>

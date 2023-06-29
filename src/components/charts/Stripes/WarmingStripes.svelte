@@ -109,11 +109,6 @@
 </main>
 
 <style>
-  .chart-container {
-    max-width: 900px;
-    margin: 2rem auto;
-  }
-
   .highlighted {
     cursor: pointer;
     stroke: black;
