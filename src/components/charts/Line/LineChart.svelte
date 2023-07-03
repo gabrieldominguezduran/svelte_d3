@@ -64,7 +64,7 @@
           dominant-baseline="hanging"
           fill="white"
         >
-          {timeFormat("%b")(tick)}
+          {timeFormat("%b %y")(tick)}
         </text>
       {/each}
       <g>
