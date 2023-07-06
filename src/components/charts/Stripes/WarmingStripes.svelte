@@ -60,52 +60,56 @@
 
 <main class="chart-container" bind:clientWidth={width}>
   <h1>Warming Stripes</h1>
-  <svg {width} {height}>
-    <g>
-      {#each dataset as d, i}
-        <g
-          on:mouseover={() => handleMouseOver(i)}
-          on:focus={() => {
-            handleMouseOver(i);
-          }}
-          on:mouseout={handleMouseOut}
-          on:blur={() => {
-            handleMouseOut;
-          }}
-        >
-          <title>{`Year: ${d.year} Avg: ${d.avg}`}</title>
-          <rect
-            x={i * 6}
-            y="0"
-            width="6"
-            height="400"
-            fill={colors[Math.round(linearScale(d.avg))]}
-            title={`Year: ${d.year} Avg: ${d.avg}`}
-            class:highlighted={hoveredIndex === i}
-          />
-        </g>
-      {/each}
-    </g>
-    <g>
-      {#each xTicks as tick}
-        <text
-          x={tick === 1880
-            ? 0
-            : tick === 1930
-            ? 280
-            : tick === 1975
-            ? 550
-            : 820}
-          y={height - 20}
-          dy="6"
-          dominant-baseline="hanging"
-          fill="white"
-        >
-          {tick === 1880 ? `Year: ${tick}` : tick}
-        </text>
-      {/each}
-    </g>
-  </svg>
+  {#if dataset.length === 0}
+    <p>Loading...</p>
+  {:else}
+    <svg {width} {height}>
+      <g>
+        {#each dataset as d, i}
+          <g
+            on:mouseover={() => handleMouseOver(i)}
+            on:focus={() => {
+              handleMouseOver(i);
+            }}
+            on:mouseout={handleMouseOut}
+            on:blur={() => {
+              handleMouseOut;
+            }}
+          >
+            <title>{`Year: ${d.year} Avg: ${d.avg}`}</title>
+            <rect
+              x={i * 6}
+              y="0"
+              width="6"
+              height="400"
+              fill={colors[Math.round(linearScale(d.avg))]}
+              title={`Year: ${d.year} Avg: ${d.avg}`}
+              class:highlighted={hoveredIndex === i}
+            />
+          </g>
+        {/each}
+      </g>
+      <g>
+        {#each xTicks as tick}
+          <text
+            x={tick === 1880
+              ? 0
+              : tick === 1930
+              ? 280
+              : tick === 1975
+              ? 550
+              : 820}
+            y={height - 20}
+            dy="6"
+            dominant-baseline="hanging"
+            fill="white"
+          >
+            {tick === 1880 ? `Year: ${tick}` : tick}
+          </text>
+        {/each}
+      </g>
+    </svg>
+  {/if}
 </main>
 
 <style>

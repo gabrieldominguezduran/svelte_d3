@@ -54,50 +54,54 @@
 
 <main class="chart-container" bind:clientWidth={width}>
   <h1>Line Chart</h1>
-  <svg {width} {height}>
-    <g>
-      {#each xTickValues as tick}
-        <text
-          x={xScale(tick) + 10}
-          y={height - margin.bottom}
-          dy="6"
-          dominant-baseline="hanging"
-          fill="white"
-        >
-          {timeFormat("%b %y")(tick)}
-        </text>
-      {/each}
+  {#if dataset.length === 0}
+    <p>Loading...</p>
+  {:else}
+    <svg {width} {height}>
       <g>
-        <line
-          x1={0}
-          y1={height - margin.bottom}
-          x2={width - margin.right}
-          y2={height - margin.bottom}
-          stroke="white"
-        />
-        {#each yTicks as tick}
-          <text x={margin.left} y={yScale(tick)} dy="-6" dx="3" fill="white">
-            {tick.toFixed(0)}
+        {#each xTickValues as tick}
+          <text
+            x={xScale(tick) + 10}
+            y={height - margin.bottom}
+            dy="6"
+            dominant-baseline="hanging"
+            fill="white"
+          >
+            {timeFormat("%b %y")(tick)}
           </text>
         {/each}
-        <line
-          x1={margin.left}
-          y1={margin.top}
-          x2={margin.left}
-          y2={height - margin.bottom}
-          stroke="white"
-        />
-      </g>
-      <g>
-        {#if dataset.length > 0}
-          <path
-            d={line(dataset)}
-            fill="none"
-            stroke="yellow"
-            stroke-width="2"
+        <g>
+          <line
+            x1={0}
+            y1={height - margin.bottom}
+            x2={width - margin.right}
+            y2={height - margin.bottom}
+            stroke="white"
           />
-        {/if}
-      </g>
-    </g></svg
-  >
+          {#each yTicks as tick}
+            <text x={margin.left} y={yScale(tick)} dy="-6" dx="3" fill="white">
+              {tick.toFixed(0)}
+            </text>
+          {/each}
+          <line
+            x1={margin.left}
+            y1={margin.top}
+            x2={margin.left}
+            y2={height - margin.bottom}
+            stroke="white"
+          />
+        </g>
+        <g>
+          {#if dataset.length > 0}
+            <path
+              d={line(dataset)}
+              fill="none"
+              stroke="yellow"
+              stroke-width="2"
+            />
+          {/if}
+        </g>
+      </g></svg
+    >
+  {/if}
 </main>
