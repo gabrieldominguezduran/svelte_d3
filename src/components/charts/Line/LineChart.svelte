@@ -1,5 +1,6 @@
 <script>
   import { onMount } from "svelte";
+  import { draw } from "svelte/transition";
   import { timeFormat } from "d3-time-format";
   import * as d3 from "d3";
 
@@ -94,6 +95,7 @@
         <g>
           {#if dataset.length > 0}
             <path
+              transition:draw={{ duration: 3000 }}
               d={line(dataset)}
               fill="none"
               stroke="yellow"
