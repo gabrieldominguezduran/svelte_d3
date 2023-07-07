@@ -13,7 +13,7 @@
 
   export let margin = { top: 20, right: 20, bottom: 20, left: 20 };
 
-  let width = 1200;
+  let width = 800;
   $: height = width;
   $: mainWidth = width - margin.left - margin.right;
   $: mainHeight = height - margin.top - margin.bottom;
@@ -60,7 +60,7 @@
 <figure class="c" bind:clientWidth={width}>
   <svg {width} {height}>
     <g style={move(margin.top, margin.left)}>
-      {#each dots as { x, y, r }}
+      {#each $dots as { x, y, r }}
         <circle style={move(x, y)} r={Math.max(0, r)} fill={colorScale(r)} />
       {/each}
     </g>
