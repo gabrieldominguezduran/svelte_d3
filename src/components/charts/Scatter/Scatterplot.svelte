@@ -13,7 +13,7 @@
 
   export let margin = { top: 20, right: 20, bottom: 20, left: 20 };
 
-  let width = 800;
+  let width = 950;
   $: height = width;
   $: mainWidth = width - margin.left - margin.right;
   $: mainHeight = height - margin.top - margin.bottom;

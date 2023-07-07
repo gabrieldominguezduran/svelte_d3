@@ -1,8 +1,12 @@
 <script>
   import { onMount } from "svelte";
   import * as d3 from "d3";
+
   let width = 950;
   let height = 500;
+
+  $: mainWidth = width - margin.left - margin.right;
+  $: mainHeight = height - margin.top - margin.bottom;
 
   const margin = { top: 20, right: 40, bottom: 20, left: 0 };
   let dataset = [];
@@ -25,12 +29,12 @@
     xScale = d3
       .scaleLinear()
       .domain([0, d3.max(dataset, (d) => d.price)])
-      .range([0, width]);
+      .range([0, mainWidth]);
 
     yScale = d3
       .scaleLinear()
       .domain([0, d3.max(dataset, (d) => d.carat)])
-      .range([height, 0]);
+      .range([mainHeight, 0]);
 
     xTicks = d3.range(
       0,
@@ -78,7 +82,7 @@
           stroke="white"
         />
       </g>
-      <g transform="translate({margin.left} {margin.top - 20})">
+      <g transform="translate({margin.left} {margin.top - 30})">
         {#each yTicks as tick}
           <text x={0} y={yScale(tick)} dy="-6" dx="3" fill="white">
             {tick}
