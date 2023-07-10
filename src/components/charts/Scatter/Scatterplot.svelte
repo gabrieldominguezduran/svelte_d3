@@ -1,6 +1,5 @@
 <script>
   import { spring } from "svelte/motion";
-  import { cubicOut } from "svelte/easing";
   import * as d3 from "d3";
 
   const move = (x, y) => `transform: translate(${x}px, ${y}px)`;
