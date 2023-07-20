@@ -92,6 +92,21 @@
   };
 
   $: width, projections, drawCanvas();
+
+  // tween bubble sizes & colors
+  let bubbles = tweened(
+    countryShapes.map((d) => [0, "#fff"]),
+    {
+      duration: 1000,
+    }
+  );
+  $: {
+    const newBubbles = data.map((d, i) => [
+      rScale(rAccessor(d)),
+      colorScale(colorAccessor(d)),
+    ]);
+    bubbles.set(newBubbles);
+  }
 </script>
 
 <figure class="canvas-wrapper" bind:clientWidth={width}>
