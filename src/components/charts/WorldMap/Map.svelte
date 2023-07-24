@@ -107,6 +107,43 @@
     ]);
     bubbles.set(newBubbles);
   }
+
+  // draw one bubble for each country
+  const drawBubbles = () => {
+    if (!canvasElement) return;
+    if (!blankMap) return;
+    const ctx = canvasElement.getContext("2d");
+
+    ctx.putImageData(blankMap, 0, 0);
+
+    ctx.globalCompositeOperation = "multiply";
+    const paths = projections.map(d3.geoPath);
+    data.forEach((d, i) => {
+      const name = nameAccessor(d);
+      const countryShape = countryShapes.find(
+        (country) => country["properties"]["geounit"] == nameAccessor(d)
+      );
+      if (!countryShape) return;
+      let centroid = paths[0].centroid(countryShape);
+      if (!centroid) return;
+      if (
+        paths[1] &&
+        (Number.isNaN(centroid[0]) ||
+          centroid[0] < width * 0.06 ||
+          ["United States of America", "Canada"].includes(name))
+      )
+        centroid = paths[1].centroid(countryShape);
+      const [r, color] = $bubbles[i];
+      ctx.beginPath();
+      ctx.fillStyle = color;
+      ctx.arc(...centroid, r, 0, 2 * Math.PI);
+      ctx.fill();
+    });
+
+    ctx.globalCompositeOperation = "normal";
+  };
+
+  $: data, projections, $bubbles, drawBubbles();
 </script>
 
 <figure class="canvas-wrapper" bind:clientWidth={width}>
