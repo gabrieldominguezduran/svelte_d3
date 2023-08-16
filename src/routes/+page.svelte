@@ -1,4 +1,5 @@
 <script>
+  import ForceWrapper from "../components/charts/Force/ForceWrapper.svelte";
   import LineChart from "../components/charts/Line/LineChart.svelte";
   import Scatter1 from "../components/charts/Scatter/Scatter1.svelte";
   import Scatter2 from "../components/charts/Scatter/Scatter2.svelte";
@@ -13,3 +14,4 @@
 <Scatter2 />
 <ScatterPlotWrapper />
 <MapWrapper />
+<ForceWrapper />

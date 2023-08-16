@@ -20,7 +20,7 @@
 
 <main class="chart-container scatter">
   <h1>Dots</h1>
-  <div class="note">CLick to update</div>
+  <div class="note">Click to update</div>
   <Scatterplot {data} />
 </main>
 <svelte:window

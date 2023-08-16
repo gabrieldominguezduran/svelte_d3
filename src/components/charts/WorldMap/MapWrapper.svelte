@@ -14,7 +14,7 @@
 
 <main class="chart-container">
   <h1>Map</h1>
-  <div class="note">CLick to update</div>
+  <div class="note">Click to update</div>
   <div class="wrapper">
     <Map
       {data}
