@@ -18,4 +18,8 @@
     .on("tick", () => {
       renderDots = [...dots];
     });
+
+  $: forces.forEach(([name, force]) => {
+    simulation.force(name, force);
+  });
 </script>
