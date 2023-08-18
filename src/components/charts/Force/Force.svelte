@@ -10,7 +10,7 @@
   let renderedDots = [];
 
   let width = 1200;
-  $: height = width;
+  $: height = width / 2;
 
   $: simulation = d3
     .forceSimulation()

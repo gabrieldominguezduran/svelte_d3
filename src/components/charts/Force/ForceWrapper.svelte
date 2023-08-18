@@ -23,15 +23,49 @@
     useForceCollide && ["collide", activeForceCollide],
     useForceRadial && ["radial", activeForceRadial],
   ].filter((d) => d);
+
+  const numberOfDots = 100;
+  let dots = new Array(numberOfDots).fill(0).map((_) => ({}));
+
+  const onClick = (e) => {
+    if (!element) return;
+
+    const bounds = element.getBoundingClientRect();
+    const x = e.clientX - bounds.left;
+    const y = e.clientY - bounds.top;
+    centerPosition = [x, y];
+  };
 </script>
 
 <main class="chart-container">
   <h1>Force</h1>
   <div class="note">Click to update</div>
-  <div class="wrapper" />
+  <div class="controls">
+    <label>
+      <input type="checkbox" bind:checked={useForceCollide} />
+      Collide?
+    </label>
+    <label>
+      <input type="checkbox" bind:checked={useForceRadial} />
+      Radial?
+    </label>
+  </div>
+
+  <div on:click={onClick} bind:this={element}>
+    <Force {dots} {forces} />
+  </div>
 </main>
 
 <style>
+  .controls {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -1rem;
+    margin-bottom: 2rem;
+  }
+  label + label {
+    margin-left: 1em;
+  }
   .note {
     font-style: italic;
     color: var(--text-light);
