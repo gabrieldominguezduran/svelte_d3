@@ -4,6 +4,7 @@
   import Scatter1 from "../components/charts/Scatter/Scatter1.svelte";
   import Scatter2 from "../components/charts/Scatter/Scatter2.svelte";
   import ScatterPlotWrapper from "../components/charts/Scatter/ScatterPlotWrapper.svelte";
+  import SpiralWrapper from "../components/charts/Spiral/SpiralWrapper.svelte";
   import WarmingStripes from "../components/charts/Stripes/WarmingStripes.svelte";
   import MapWrapper from "../components/charts/WorldMap/MapWrapper.svelte";
 </script>
@@ -15,3 +16,4 @@
 <ScatterPlotWrapper />
 <MapWrapper />
 <ForceWrapper />
+<SpiralWrapper />
