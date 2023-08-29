@@ -18,6 +18,17 @@
   let width = 100;
   $: height = width;
 
-  $: metricDomaina = [0, 500];
+  $: metricDomain = [0, 500];
   $: timeDomain = d3.extent(data, timeAccessor);
+
+  $: colorScale = d3
+    .scaleLinear()
+    .domain([
+      0,
+      metricDomain[1] / 3,
+      (metricDomain[1] / 3) * 2,
+      metricDomain[1],
+    ])
+    .range(["#f4f4f4", "#89BC97", "#5D2EDD", "#000"])
+    .interpolate(d3.interpolateHclLong);
 </script>
