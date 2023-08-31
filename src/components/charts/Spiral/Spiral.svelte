@@ -1,5 +1,6 @@
 <script>
   import * as d3 from "d3";
+  import { fade } from "svelte/transition";
 
   export let data = [];
   export let metricAccessor = (d) => d["x"];
@@ -31,4 +32,7 @@
     ])
     .range(["#f4f4f4", "#89BC97", "#5D2EDD", "#000"])
     .interpolate(d3.interpolateHclLong);
+
+  const maxLength = 8;
+  $: scaleScale = d3.scaleSqrt().domain(metricDomain).range([0, maxLength]);
 </script>
