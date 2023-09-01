@@ -35,4 +35,15 @@
 
   const maxLength = 8;
   $: scaleScale = d3.scaleSqrt().domain(metricDomain).range([0, maxLength]);
+  $: colorScaleTicks = colorScale.ticks(6).map((d) => {
+    const scale = scaleScale(d);
+    const tickHeight = (height / 100) * scale;
+
+    return {
+      tickHeight,
+      value: d,
+      percent: (d * 100) / metricDomain[1],
+      color: colorScale(d),
+    };
+  });
 </script>
