@@ -46,4 +46,12 @@
       color: colorScale(d),
     };
   });
+
+  $: radiusScale = d3.scaleLinear().domain(timeDomain).range([20, 40]);
+  $: yearRadiusScale = d3
+    .scaleLinear()
+    .domain(timeDomain)
+    .range([height * 0.21, height * 0.41]);
+  $: strokeWidthScale = d3.scaleLinear().domain(timeDomain).range([0.3, 0.65]);
+  $: angleScale = d3.scaleLinear().domain([0, 365]).range([0.3, 0.65]);
 </script>
