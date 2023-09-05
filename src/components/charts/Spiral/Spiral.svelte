@@ -54,4 +54,10 @@
     .range([height * 0.21, height * 0.41]);
   $: strokeWidthScale = d3.scaleLinear().domain(timeDomain).range([0.3, 0.65]);
   $: angleScale = d3.scaleLinear().domain([0, 365]).range([0.3, 0.65]);
+
+  const getPositionFromDistanceAndAngle = (distance, angle) => {
+    const x = distance * Math.cos((angle * Math.PI) / 180);
+    const y = distance * Math.sin((angle * Math.PI) / 180);
+    return { x, y };
+  };
 </script>
