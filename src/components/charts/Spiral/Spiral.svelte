@@ -60,4 +60,9 @@
     const y = distance * Math.sin((angle * Math.PI) / 180);
     return { x, y };
   };
+
+  const getTransformFromDistanceAndAngle = (distance, angle) => {
+    const { x, y } = getPositionFromDistanceAndAngle(distance, angle);
+    return `translate(${x}, ${y})`;
+  };
 </script>
