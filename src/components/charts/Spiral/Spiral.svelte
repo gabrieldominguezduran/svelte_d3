@@ -65,4 +65,9 @@
     const { x, y } = getPositionFromDistanceAndAngle(distance, angle);
     return `translate(${x}, ${y})`;
   };
+
+  const getPathForValue = (value) => {
+    const height = scaleScale(value);
+    return ["M", 0, -height / 2, "L", 0, height / 2].join(" ");
+  };
 </script>
