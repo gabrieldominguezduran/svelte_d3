@@ -70,4 +70,8 @@
     const height = scaleScale(value);
     return ["M", 0, -height / 2, "L", 0, height / 2].join(" ");
   };
+
+  const monthNames = range(0, 12).map((i) =>
+    d3.timeFormat("%b")(new Date(2000, i, 1))
+  );
 </script>
