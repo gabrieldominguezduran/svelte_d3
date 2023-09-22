@@ -74,4 +74,18 @@
   const monthNames = range(0, 12).map((i) =>
     d3.timeFormat("%b")(new Date(2000, i, 1))
   );
+  $: months = monthNames.map((month, i) => {
+    const angle = (360 / 12) * i - 360 / 4;
+    const { x, y } = getPositionFromDistanceAndAngle(
+      width * (i ? 0.38 + i * 0.009 : 0.49),
+      angle
+    );
+    return {
+      i,
+      name: month,
+      angle,
+      x: x + width / 2,
+      y: y - height / 2,
+    };
+  });
 </script>
